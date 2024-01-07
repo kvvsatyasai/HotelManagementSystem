@@ -1,0 +1,113 @@
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <title>List of Rooms</title>
+    </head>
+<style>
+    .cent{
+        margin-top: 50px;
+        text-align: center;
+    font-family: monospace;
+    }
+    .table090{
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
+    
+    }
+    .linkk{
+        margin-left: 50px;
+        font-size: 20px;
+        margin-top: 20;
+        color: white;
+        font-family: monospace;
+        text-decoration: none;
+        background-color: black;
+        background-size: 400px;
+        border-radius: 10px;
+    }
+
+    .linkk1{
+        margin-left: 50px;
+        font-size: 20px;
+        margin-top: 20;
+        color: white;
+        font-family: monospace;
+        text-decoration: none;
+        background-color: black;
+        background-size: 400px;
+        border-radius: 10px;
+        text-decoration: none;
+    }
+
+    .linkk1:hover{
+        color: white;
+        text-decoration: none;
+        background-color: greenyellow !important;
+        background-size: 400px;
+        transform: scale(1.1);
+        transition: ease-in-out 0.5s;
+
+    }
+
+    .linkk:hover{
+        color: white;
+        text-decoration: none;
+        background-color: red !important;
+        background-size: 400px;
+        transform: scale(1.1);
+        transition: ease-in-out 0.5s;
+
+    }
+    .count{
+        margin-left: 50px;
+        font-size: 20px;
+        margin-top: 20;
+        color: lightslategray;
+        font-family: monospace;
+    }
+</style>
+
+<body>
+    <a href="{% url 'intro' %}" class="btn btn-link linkk">Back to home</a>
+
+        <h1 class="cent">List Of Rooms</h1>
+       
+
+<br><br>
+
+    <table class="table table090">
+        <thead>
+          <tr>
+            <th scope="col">ROOM NUMBER</th>
+            <th scope="col">ROOM TYPE</th>
+            <th scope="col">PRICE</th>
+            <th scope="col">CAPACITY</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for x in rm %}
+          <tr>
+            
+            <td>{{x.Room_No}}</td>
+            <td>{{x.Room_Type}}</td>
+            <td>{{x.Room_Price}}</td>
+            <td>{{x.capacity}}</td> 
+    
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    <div class="cent">
+        <a href="{% url 'roomAdd' %}" class="btn btn-link linkk1">Add Rooms</a>
+    </div>
+      <div class="count">
+        Number of Rooms: {{rm|length}}
+      </div>
+</body>
+</html>

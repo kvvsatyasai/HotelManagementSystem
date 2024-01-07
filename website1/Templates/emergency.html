@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Emergency Procedures</title>
+  <style>
+    /* Add your custom CSS styles here for better presentation */
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+    footer{
+      text-align: center;
+    }
+
+    a{
+        text-decoration: none;
+        color: white;
+        background-color: black;
+        padding: 10px;
+        border-radius: 20px;
+        box-shadow: 0 0 0 5px #ffffff80;
+        transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    a:hover{
+        background-color: #ff0000;
+        color: white;
+        transform: scale(1.1);
+        transition-timing-function:  cubic-bezier(0.4, 0, 0.2, 1);
+        animation-duration: 5s;
+        box-shadow: 0 0 0 5px #ffffff80;
+        transform: scale(1.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+    div{
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        background-color: #f2f2f2;
+        box-shadow: 0 0 0 5px #ffffff80;
+        transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    h2{
+        color: #000000;
+        font-weight: 700;
+        transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-align: center;
+        transform: translateZ(100px);
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+     li{
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #f2f2f2;
+            box-shadow: 0 0 0 5px #ffffff80;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+     }
+    .center-div{
+        display: flex;
+        justify-content: center;
+        align-items: right;
+        flex-direction: column;
+    }
+    /* Add more CSS styles as needed */
+  </style>
+</head>
+<body>
+  <h1>Emergency Procedures</h1>
+  <a href="{%url 'intro'%}">Back to home</a><br>
+<div class="cont-1">
+    <div class="center-div">
+  <section>
+    <h2><svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22.833c-5.294 0-9.583-4.29-9.583-9.583S6.706 3.667 12 3.667 21.583 7.957 21.583 13.25 17.294 22.833 12 22.833zM13.458 9.917H10.54V13.832H7.625v2.916h2.916v3.875h2.916v-3.875h2.917V13.832h-2.917V9.917z"
+          fill="#FF0000"
+        />
+      </svg> Medical Emergencies </h2>
+    <p>
+      In case of a medical emergency:
+      <ul>
+        <li>Call emergency services immediately at [Emergency phone number].</li>
+        <li>Administer first aid if trained and if it's safe to do so.</li>
+        <li>Inform hostel staff or management about the situation.</li>
+        <li>Stay with the person until professional help arrives.</li>
+        <!-- Add more specific medical emergency procedures -->
+      </ul>
+    </p>
+  </section>
+
+  <section>
+    <h2><svg
+        width="23"
+        height="23"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M16.47 2.929c-.643 0-1.21.379-1.48.951a3.3 3.3 0 0 0-3.95 0c-.27-.572-.838-.951-1.48-.951a2.96 2.96 0 0 0-2.231 1.005A5.973 5.973 0 0 0 4.5 9.664c0 1.204.357 2.322.964 3.254 1.112 1.833 3.685 3.555 6.55 5.37 1.242.775 2.515 1.57 3.447 2.287.42.287.916.287 1.336 0 .932-.717 2.205-1.512 3.447-2.287 2.865-1.815 5.438-3.537 6.55-5.37.607-.932.964-2.05.964-3.254a5.973 5.973 0 0 0-2.259-4.73 2.96 2.96 0 0 0-2.232-1.005zm0 1.488c1.017 0 1.92.586 2.381 1.489-.948 1.33-3.304 3.161-5.89 4.872-1.582 1.016-3.222 2.067-4.1 3.03-.442.422-.794.915-1.025 1.429a1.8 1.8 0 0 0-.096 1.087c.117.33.409.574.759.64.57.1 1.187.135 1.827.135.425 0 .822-.086 1.174-.247.265-.135.497-.295.695-.473 1.458-.939 3.263-2.192 5.055-3.465 2.69-1.711 4.949-3.492 5.897-4.823.462-.904 1.365-1.489 2.381-1.489.365 0 .722.06 1.069.179.193.073.369.178.522.309.321.253.515.642.515 1.07a1.8 1.8 0 0 1-.096 1.087c-.117.33-.409.574-.759.64-.57.1-1.187.135-1.827.135-.425 0-.822-.086-1.174-.247a3.364 3.364 0 0 0-.695-.473c-1.458-.939-3.263-2.192-5.055-3.465-2.69-1.711-4.95-3.492-5.898-4.823a1.935 1.935 0 0 1-1.069-.179c-.193-.073-.37-.178-.523-.309a1.487 1.487 0 0 1-.514-1.07 1.8 1.8 0 0 1 .096-1.087c.117-.33.409-.574.759-.64.57-.1 1.187-.135 1.827-.135zm0 3.974c1.045 0 1.89 1.156 1.89 2.569 0 1.413-.845 2.57-1.89 2.57-1.045 0-1.89-1.157-1.89-2.57 0-1.413.845-2.569 1.89-2.569zm-.944 3.498h1.889v1.889h-1.89v-1.89z"
+          fill="#FF0000"
+        />
+      </svg>
+       Fire Emergencies</h2>
+    <p>
+      If there is a fire emergency:
+      <ul>  
+        <li>Activate the fire alarm and evacuate the building.</li>
+        <li>Follow the designated evacuation routes to the assembly point[Specify location].</li>
+        <li>Do not use elevators during a fire. Use stairs instead.</li>
+        <!-- Add more specific fire emergency procedures -->
+      </ul>
+    </p>
+  </section>
+
+  <!-- Add sections for other types of emergencies such as , security threats, etc. -->
+  <section>
+    <h2><svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12 0C8.688 0 6 2.688 6 6v2H5c-.553 0-1 .447-1 1v13c0 .553.447 1 1 1h14c.553 0 1-.447 1-1V9c0-.553-.447-1-1-1h-1V6c0-3.312-2.688-6-6-6zm2 8h-4v2h4V8z"
+          fill="#FFA500"
+        />
+      </svg>
+       Dealing with Security Threats</h2>
+    <p>
+      In case of a security threat:
+      <ul>
+        <li>Immediately report any suspicious activities or individuals to hostel management or security personnel.</li>
+        <li>Stay calm and do not confront the threat directly.</li>
+        <li>Contact emergency services by dialing [Emergency phone number] or the local emergency number.</li>
+        <li>Follow hostel security protocols and instructions provided by management.</li>
+        <li>Seek shelter in a secure area within the hostel if there's an immediate threat.</li>
+        <li>Assist others in finding safety if it's safe to do so.</li>
+        <li>Cooperate fully with authorities or security personnel upon their arrival.</li>
+        <!-- Add more specific security threat procedures -->
+        <li>Stay informed about any follow-up instructions or safety measures provided by hostel management or authorities.</li>
+        <li>Report incidents to hostel management or security, even if minor.</li>
+        <li>Seek support or counseling if needed after the incident.</li>
+      </ul>
+    </p>
+  </section>
+  <section>
+    <h2><svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12 0C8.688 0 6 2.688 6 6v1H5c-.553 0-1 .447-1 1v13c0 .553.447 1 1 1h14c.553 0 1-.447 1-1V8c0-.553-.447-1-1-1h-1V6c0-3.312-2.688-6-6-6zm-1 15H7v-1h4v1zm6 0h-4v-1h4v1zm0-3H5V8h12v4zm-6 4H7v-1h4v1zm6 0h-4v-1h4v1z"
+          fill="#1E90FF"
+        />
+      </svg>
+       Utility Failure Procedures</h2>
+    <p>
+      In case of utility failures (power outage, water shortage, etc.):
+      <ul>
+        <li>Contact hostel management or designated personnel to report the issue immediately.</li>
+        <li>Follow any instructions provided by management regarding temporary arrangements or alternative resources.</li>
+        <li>Conserve resources such as water and electricity as instructed.</li>
+        <li>Stay informed about the progress of utility restoration efforts from hostel staff.</li>
+        <!-- Add more specific utility failure procedures -->
+      </ul>
+    </p>
+  </section>
+  <section>
+    <h2><svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12 0C8.688 0 6 2.688 6 6v2H5c-.553 0-1 .447-1 1v11c0 .553.447 1 1 1h14c.553 0 1-.447 1-1V9c0-.553-.447-1-1-1h-1V6c0-3.312-2.688-6-6-6zm2 8h-4v2h4V8zm-1 5h-2v2h2v-2z"
+          fill="#FF6347"
+        />
+      </svg>
+       Health Pandemic Procedures</h2>
+    <p>
+      In case of a health pandemic or disease outbreak:
+      <ul>
+        <li>Follow health guidelines issued by local health authorities and hostel management.</li>
+        <li>Practice good hygiene by washing hands regularly and using sanitizers provided.</li>
+        <li>Adhere to social distancing measures and wear masks as advised.</li>
+        <li>Seek medical advice promptly if experiencing symptoms and self-isolate if necessary.</li>
+        <!-- Add more specific health pandemic procedures -->
+      </ul>
+    </p>
+  </section>
+
+</div>
+</div>
+  <footer>
+    <p>For any emergency, always prioritize your safety. Follow instructions from authorities.</p>
+    <p>Contact hostel staff for any additional information or assistance.</p>
+  </footer>
+</body>
+</html>

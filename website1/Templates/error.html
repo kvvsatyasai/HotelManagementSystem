@@ -1,0 +1,108 @@
+<html>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">    
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css"> 
+
+ <title>Profile</title>
+<style>
+    /* Sidebar styling */
+
+    .sidebar {
+        background-color: #f1f1f1;
+        height: 100%;
+        width: 200px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    /* Sidebar link styling */
+    .sidebar a {
+        display: block;
+        color: #000;
+        padding: 16px;
+        text-decoration: none;
+    }
+
+    /* Active link styling */
+    .sidebar a.active {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    /* Hover link styling */
+    .sidebar a:hover:not(.active) {
+        background-color: #555;
+        color: white;
+    }
+    .pad{
+        margin-left: 200px;
+    }
+
+    h2{
+        margin-left: 200px;
+    }
+</style>
+
+<body>
+<!-- Sidebar -->
+<div class="sidebar">
+    <a href="#req">My Bookings</a>
+    <a href="#info">Personal Information</a>
+    <a href="{% url 'intro'  %}">Go To Home</a>
+    <a href="{% url 'logout'  %}" onclick="return confirm('Are u sure want to log out?')">LogOut</a>
+</div>
+
+<!-- Go to home -->
+
+
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24  flex flex-wrap">
+    <div class="lg:w-2/3 mx-auto">
+
+        
+      <div class="flex flex-wrap w-full bg-gray-100 py-26 px-10 pb-9  items-center text-center">
+        <!-- <img alt="gallery" class="w-full object-cover h-full object-center block opacity-25 absolute inset-0" src="https://dummyimage.com/820x340"> -->
+        <div class="ml-6">
+        <h1 class="text-2xl text-gray-900 font-medium title-font mb-9 start-9 mt-3">Booking History</h1>
+      
+        <div class="text-center text-gray-900 relative z-10 w-full left-36">
+            You did not booked any room yet..!
+        </div>
+      </div>
+      </div>
+    
+   
+      <div class="flex flex-wrap w-1/2 bg-gray-100 py-26  relative mt-20">
+        <!-- <img alt="gallery" class="w-full object-cover h-full object-center block opacity-25 absolute inset-0" src="https://dummyimage.com/820x340"> -->
+        <div class="ml-6 ">
+        <h1 class="text-2xl text-gray-900 font-medium title-font mb-9 start-9 mt-3">Edit Profile</h1>
+        <div class="text-center relative z-10 w-full justify-items-start">
+          <h2 class="text-lg text-gray-900 font-medium title-font mb-2">Name: {{name}}</h2>
+          <h2 class="text-lg text-gray-900 font-medium title-font mb-2">Email: {{email}}</h2>
+          <h2 class="text-lg text-gray-900 font-medium title-font mb-2">Phone: {{phone}}</h2>
+          <!-- <a class="mt-3 text-indigo-500 inline-flex items-center">Learn More
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Page content -->
+
+
+</div>
+</body>
+
+</html>

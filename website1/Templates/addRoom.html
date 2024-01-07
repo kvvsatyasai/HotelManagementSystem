@@ -1,0 +1,211 @@
+<html>
+  <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">    
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css"> 
+    <title>
+        Add Room
+    </title>
+ <style>
+    .form_container {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  position: relative;
+  top: 65px;
+  left: 200px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 50px 40px 20px 40px;
+  background-color: #ffffff;
+  box-shadow: 0px 106px 42px rgba(0, 0, 0, 0.01),
+    0px 59px 36px rgba(0, 0, 0, 0.05), 0px 26px 26px rgba(0, 0, 0, 0.09),
+    0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 11px;
+  font-family: "Inter", sans-serif;
+}
+
+.logo_container {
+  box-sizing: border-box;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(180deg, rgba(248, 248, 248, 0) 50%, #F8F8F888 100%);
+  border: 1px solid #F7F7F8;
+  filter: drop-shadow(0px 0.5px 0.5px #EFEFEF) drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+  border-radius: 11px;
+}
+
+.title_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #212121;
+}
+
+.subtitle {
+  font-size: 0.725rem;
+  max-width: 80%;
+  text-align: center;
+  line-height: 1.1rem;
+  color: #8B8E98
+}
+
+.input_container {
+  width: 100%;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.icon {
+  width: 20px;
+  position: absolute;
+  z-index: 99;
+  left: 12px;
+  bottom: 9px;
+}
+
+.input_label {
+  font-size: 0.75rem;
+  color: #8B8E98;
+  font-weight: 600;
+}
+
+.input_field {
+  width: auto;
+  height: 40px;
+  padding: 0 0 0 40px;
+  border-radius: 7px;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  filter: drop-shadow(0px 1px 0px #efefef)
+    drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+  transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+
+.input_field:focus {
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 0px 2px #242424;
+  background-color: transparent;
+}
+.pos-right{
+  position: relative;
+  left: 1100px;
+  top: 100px;
+  width: 400px;
+  scroll-behavior: smooth;
+}
+
+</style>
+
+
+<body>
+      
+ <header class="text-gray-600 body-font fixed">
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a href="{% url 'intro' %}" class="inline-flex items-center bg-slate-950 border-0 py-3 px-10 focus:outline-none hover:bg-red-500 hover:scale-110 transition duration-500 ease-in-out rounded-full text-gray-50 mt-4 md:mt-0">Back to home</a>
+  </div>
+</header>
+
+<div class="pos-right">
+{% if messages %}
+{% for message in messages %}
+  <div role="alert">
+    {% if message.tags == 'error' %}
+    <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+      Error
+    </div>
+    <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+      <p>{{ message }}</p>
+    </div>
+    {% else %}
+    <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+       Success
+      </div>
+      <div class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-600">
+        <p>{{ message }}</p>
+      </div>
+   {% endif %}
+  </div>
+{% endfor %}
+{% endif %}
+</div>
+
+
+       <section class="text-gray-600 body-font">
+        <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col  items-center">
+      
+               
+          <div class="lg:flex-grow w-full md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+            
+          <form class="form_container" method="post" action="{% url 'add' %}">
+            {% csrf_token %}
+              <div class="title_container">
+                <p class="title">Add Rooms</p>
+                <span class="subtitle">Get started with our app, just add the required room  and enjoy the experience.</span>
+              </div>
+              <br>
+              <div class="input_container">
+                  <label class="input_label" for="email_field">Room Number</label>      
+                <input placeholder="001" title="Name" name="room_no" type="text" class="input_field" id="email_field" value={{name}}>
+              </div>
+              <div class="input_container">
+                <label class="input_label" for="password_field">Room Price</label>
+          
+                <input placeholder="10000" title="Email" name="room_price" type="text" class="input_field" id="password_field">
+              </div>
+              <div class="input_container">
+              <label class="input_label" for="password_field">Room Type</label>
+                <select id="rooms_select" name="room_type" class="input_field" required>
+                  <option  class="input_field">Select a room</option>
+                  
+              <option class="input_field">LUXURY</option>
+              <option  class="input_field">DELUXE</option>
+              <option  class="input_field">PREMIUM</option>
+              
+            </select>
+              </div>
+              <div class="input_container">
+                <label class="input_label" for="password_field">Capacity</label>
+          
+                <input placeholder="1" title="Email" name="capacity" type="text" class="input_field" id="password_field" >
+              </div>
+              <br>
+              <button type="submit"  class="bg-slate-900 inline-flex py-3 px-5 rounded-lg items-center lg:ml-4 md:ml-0 ml-4 md:mt-4 mt-0 lg:mt-0 hover:bg-lime-500 hover:scale-110 transition duration-500 ease-in-out  focus:outline-none" title="Sign In" >
+                <span class="text-gray-50" title="continue">Add</span>
+              </button>
+              <br>
+            </form>
+          </div>
+          <div class="lg:max-w-lg  lg:w-full md:w-1/2 w-5/6">
+            <img class="object-cover object-center rounded  " alt="hero" src="https://images.unsplash.com/photo-1553369728-15ec6971afaf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+          </div>
+        </div>
+      </section>
+
+
+
+     
+</body>
+<script>
+  function alertBox() {
+    alert("Room has been added");
+  }
+</script>
+</html>
+
