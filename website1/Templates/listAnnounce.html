@@ -22,7 +22,7 @@
     }
     .linkk{
         margin-left: 50px;
-        font-size: 10px;
+        font-size: 20px;
         margin-top: 20;
         color: white;
         font-family: monospace;
@@ -88,12 +88,26 @@
     align-items: center;
 }
 
+.anc{
+    margin-left: 50px;
+        font-size: 20px;
+        margin-top: 40;
+        color: white;
+        font-family: monospace;
+        text-decoration: none;
+        background-color: black;
+        background-size: 400px;
+        border-radius: 10px;
+
+}
+
 </style>
 
 <body>
-    <a href="{% url 'intro' %}" class="btn btn-link linkk">Back to home</a>
+    <a href="{% url 'intro' %}" class="btn btn-link linkk">Back to home</a> 
+   
 
-        <h1 class="cent">List Of Rooms</h1>
+        <h1 class="cent">NoticeBoard</h1>
 
         <div class="pos-right">
             {% if messages %}
@@ -117,41 +131,43 @@
     <table class="table table090">
         <thead>
           <tr>
-            <th scope="col">ROOM NUMBER</th>
-            <th scope="col">ROOM TYPE</th>
-            <th scope="col">PRICE</th>
-            <th scope="col">CAPACITY</th>
+            <th scope="col">Creatred On</th>
+            <th scope="col">About Notice</th>
+            <th scope="col">view file</th>
+            <!-- <th scope="col">..</th> -->
           </tr>
         </thead>
         <tbody>
-           {%for rm in rm%}
+           {%for note in notice%}
               
             <tr>
-                <td scope="row">{{rm.Room_No}}</td>
-                <td>{{rm.Room_Type}}</td>
-                <td>{{rm.Room_Price}}</td>
+                <td scope="row">{{note.date_of_notice}}</td>
+                <td>{{note.notice}}</td>
+                <td>
+                <form action="{% url 'download' note.notice_id %}" method="post">
+                    {% csrf_token %}
+                <input type="submit" value="View_file">
+            </form>
+            </td>
                 <td>{{rm.capacity}}</td>
                 <td>
                     <div class="sidebyside">
-                <form method="post" action="{% url 'deleteRoom' rm.room_id %}">
+                <form method="post" action="{% url 'deleteNotice' note.notice_id %}">
                     {% csrf_token %}
                <input type="submit" class="btn btn-link " value="Delete">
-                </form>
-           
-                <form method="post" action="{% url 'update' rm.room_id %}">
-                    {% csrf_token %}
-               <input type="submit" class="btn btn-link " value="Edit">
                 </form>
             </div>
             </td>
            {% endfor %}
         </tbody>
       </table>
+      {% if request.user.is_staff %}
     <div class="cent">
-        <a href="{% url 'roomAdd' %}" class="btn btn-link linkk1">Add Rooms</a>
+        <a href="{% url 'ann' %}" class="btn btn-link linkk1">Add Notice</a>
     </div>
+    {% endif %}
       <div class="count">
-        Number of Rooms: {{rm|length}}
+        Number of Notices: {{notice|length}}
       </div>
 
 

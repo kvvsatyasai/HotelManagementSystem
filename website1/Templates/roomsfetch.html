@@ -59,8 +59,10 @@
                 <h3 class="title-font font-medium text-lg text-gray-900">Room Type: {{x.Room_Type}}</h3><br>
                 <p class="title-font font-medium text-lg text-gray-900">Room Price: {{x.Room_Price}}</p><br>
                 <p class="title-font font-medium text-lg text-gray-900">Room Size: {{x.capacity}}</p><br>
-                <a href="{% url 'bookForm' %}" class="inline-flex items-center bg-slate-950 border-0 py-1 px-3 focus:outline-none hover:bg-lime-500 hover:scale-110 transition duration-500 ease-in-out rounded text-gray-50 mt-4 md:mt-0">Book Now  
-                </a>
+                <form action="{% url 'bookForm' x.room_id %} " method="POST">
+                  {% csrf_token %}
+                <input type="submit" value="Book Now" class="inline-flex items-center bg-slate-950 border-0 py-1 px-3 focus:outline-none hover:bg-lime-500 hover:scale-110 transition duration-500 ease-in-out rounded text-gray-50 mt-4 md:mt-0">
+              </form>
               </div>
             </div>
           </div>
