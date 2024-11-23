@@ -1,4 +1,3 @@
-
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,15 +20,17 @@
     
     }
     .linkk{
-        margin-left: 50px;
-        font-size: 20px;
+        margin-left: 80px;
+        font-size: 15px;
+        height: 30px;
         margin-top: 20;
         color: white;
         font-family: monospace;
         text-decoration: none;
         background-color: black;
         background-size: 400px;
-        border-radius: 10px;
+        border-radius: 10px;margin-top: 30px;
+
     }
 
     .linkk1{
@@ -75,7 +76,7 @@
     .pos-right{
   position: relative;
 
-  left: 1000px;
+  left: 1100px;
   top: 10px;
   width: 400px;
   scroll-behavior: smooth;
@@ -88,99 +89,63 @@
     align-items: center;
 }
 
-.anc{
-    margin-left: 50px;
-        font-size: 20px;
-        margin-top: 40;
-        color: white;
-        font-family: monospace;
-        text-decoration: none;
-        background-color: black;
-        background-size: 400px;
-        border-radius: 10px;
 
-}
 
 </style>
 
 <body>
-    <a href="{% url 'intro' %}" class="btn btn-link linkk">Back to home</a> 
-   
+    <a href="{% url 'intro' %}" class="btn btn-link linkk ">Back to home</a>
 
-        <h1 class="cent">NoticeBoard</h1>
+        <h1 class="cent">Student Info</h1>
 
         <div class="pos-right">
             {% if messages %}
             {% for message in messages %}
               <div role="alert">
-                {% if message.tags == 'error' %}
-                <div  class="alert alert-danger" role="alert">
-                    {{ message }}
-                </div>
-               {% endif %}
+                <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                   Success
+                  </div>
+                  <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                    <p>{{ message }}</p>
+                  </div>
               </div>
             {% endfor %}
             {% endif %}
-            </div>
+       
+     
+</div>
 
 <br><br>
 
     <table class="table table090">
         <thead>
           <tr>
-            <th scope="col">Created On</th>
-            <th scope="col">About Notice</th>
-            <th scope="col">view file</th>
-            <!-- <th scope="col">..</th> -->
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Ph.Number</th>
           </tr>
         </thead>
         <tbody>
-           {%for note in notice%}
-              
+           {%for u in user%}
+             
             <tr>
-                <td scope="row">{{note.date_of_notice}}</td>
-                <td>{{note.notice}}</td>
-                <td>
-                <form action="{% url 'download' note.notice_id %}" method="post">
+             
+                <td scope="row">{{u.username}}</td>
+                <td scope="row">{{u.email}}</td>
+                <td>{{u.first_name}}</td> 
+               <td>
+                <form action="{% url 'binf' u.username %}" method="post">
                     {% csrf_token %}
-                <input type="submit" value="View_file">
-            </form>
-            </td>
-                <td>{{rm.capacity}}</td>
-                <td>
-                    {% if request.user.is_staff %}
-                    <div class="sidebyside">
-                <form method="post" action="{% url 'deleteNotice' note.notice_id %}">
-                    {% csrf_token %}
-               <input type="submit" class="btn btn-link " value="Delete">
+                    <input type="submit" class="btn btn-link" value="Status">
                 </form>
-            </div>
-            {% endif %}
             </td>
+            </tr>
+        
            {% endfor %}
         </tbody>
       </table>
-      {% if request.user.is_staff %}
-    <div class="cent">
-        <a href="{% url 'ann' %}" class="btn btn-link linkk1">Add Notice</a>
-    </div>
-    {% endif %}
       <div class="count">
-        Number of Notices: {{notice|length}}
+        Number of Users: {{user|length}}
       </div>
-
-
-    <script>
-        function pop(){
-            // cancel = confirm("Are you sure you want to delete this room?");
-            confirm("Are you sure you want to delete this room?");
-            if(cancel){
-                alert("Room deleted");
-            }
-            else{
-                alert("Room not deleted");
-            }
-        }
-    </script>
 </body>
 </html>

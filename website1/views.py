@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from .models import *
+from django.db.models import Count
 from .decorators import unauthenticated_user,admin_only
 import os
 
@@ -59,9 +60,6 @@ def introduction(request):
             messages.error(request,'Please Login First...!')
             return redirect('login')
 
-    
-
-
 
 @unauthenticated_user
 def bookForm(request,room_id):
@@ -78,6 +76,9 @@ def bookForm(request,room_id):
             return HttpResponse('404 - Not Found for the booking...!')
 
 
+def checkBooking(request):
+    pass
+
 @unauthenticated_user
 def handleBooking(request):
         try:
@@ -88,23 +89,40 @@ def handleBooking(request):
                 rooms = request.POST.get('rooms_select')
                 room_id = request.POST.get('room_id')
                 get_room_id = get_object_or_404(Rooms,room_id=room_id)
-                print(get_room_id.Room_No)
-                print(rooms)
-                print(request.POST)
-                if count_user_booking < 1:
-                     bookings = Booking.objects.create(status='Booked',Customer_Name=my_user,Room_No=Rooms.objects.get(Room_No=get_room_id.Room_No))
-                     print(bookings)
-                     bookings.save()
-                     messages.success(request,'Room Booked Successfully...!')
-                     return redirect('intro')
+               
+                print("Room capacity",get_room_id.capacity)
+
+                rm_size = get_room_id.capacity
+
+                book_limit = get_room_id.booking_set.count()
+
+                print("room capacity: ",book_limit)
+
+                if count_user_booking < 1 :
+                    if book_limit == rm_size:
+                       messages.error(request,'Booking Limit Reached! Pick another room...!')
+                       return redirect('RET')
+  
+                    else: 
+                        bookings = Booking.objects.create(status='Booked',Customer_Name=my_user,Room_No=Rooms.objects.get(Room_No=get_room_id.Room_No))
+                        print(bookings)
+                        bookings.save()
+                        messages.success(request,'Room Booked Successfully...!')
+                        return redirect('intro')
+                
+
                 else: 
-                    messages.error(request,'You have already booked a room...!')
+                    messages.error(request,'You have already booked a room...! Or ')
                     return redirect('intro')
             else:
                 return HttpResponse('Not a Post method...!')
-        except Rooms.DoesNotExist:
+            
+        except Booking.DoesNotExist:
             print(Rooms.objects.all())
-            return HttpResponse('404 - Not Found for the room...!')
+            messages.error(request,'Room does not exist.!')
+            return redirect('intro')
+            
+     
 
 
 @unauthenticated_user
@@ -298,7 +316,6 @@ def handleUpdateItem(request,item_id):
         return HttpResponse('Not the post method...')
 
 
-
 def noticeBoard(request):    
        return render(request,'notice.html')
 
@@ -307,10 +324,9 @@ def handleNotice(request):
     if request.method == 'POST':
         notice = request.POST.get('notice')
         notice_file = request.FILES.get('file')
-        if notice_file:
-            new_notice = Notice(notice=notice,file=notice_file)
-            new_notice.save()
-            messages.success(request,'Notice Added Successfully...!')
+        new_notice = Notice(notice=notice,file=notice_file)
+        new_notice.save()
+        messages.success(request,'Notice Added Successfully...!')
         print(notice,notice_file)
     return redirect('NB')
 
@@ -329,23 +345,44 @@ def deleteNotice(request,notice_id):
         return HttpResponse('Not the post method...')
 
 def download_file(request,notice_id):
-    file_obj = get_object_or_404(Notice,notice_id=notice_id)
+    try:
+       file_obj = get_object_or_404(Notice,notice_id=notice_id)
 
-    with open(file_obj.file.path,'rb') as f:
-        file_content = f.read()
+       with open(file_obj.file.path,'rb') as f:
+          file_content = f.read()
      
+       if(content_type := file_obj.file.name.split('.')[-1]) == 'pdf':
+         response = HttpResponse(file_content,content_type='application/pdf')
+         response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_obj.file.name)
+       else:
+            response = HttpResponse(file_content,content_type='image/png')
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_obj.file.name)
+       return response
+    except ValueError:
+        messages.error(request,'Empty File..!')
+        return redirect('AN')
 
-    response = HttpResponse(file_content,content_type='application/force-download')
 
-    response['Content-Disposition'] = 'attachment; filename=' + os.path.basename(file_obj.file.name)
-    return response
+def studentInfo(request):
+      user = User.objects.all().filter(is_staff=False)
+      for u in user:
+            print(u.username,u.email,u.first_name)
+      return render(request,'info.html',{'user':user})
+
+def bookInfo(request,username):
+    bookings_status = Booking.objects.all().filter(Customer_Name=User.objects.get(username=username))
+    if not bookings_status:
+        messages.error(request,f'No Bookings are done by {username}...!')
+        return redirect('sinf')
+    rooms = Rooms.objects.all().filter(Room_No=Booking.objects.get(Customer_Name=User.objects.get(username=username)).Room_No)
+    return render(request,'bookInfo.html',{'Status':bookings_status,'Rooms':rooms})
+
 
 
 def handleLogout(request):
     logout(request)
     request.session.flush() #remove session data from database
     return redirect('home')
-
 
 def check(request):
     key = Rooms.objects.all()

@@ -34,6 +34,8 @@ urlpatterns = [
     path('intro/announcement',announcement,name='AN'),
     path('intro1/notice/delete-notice/<int:notice_id>/',deleteNotice,name='deleteNotice'),
     path('intro1/notice/download-file/<int:notice_id>/',download_file,name='download'),
+    path('intro1/student-info/',studentInfo,name='sinf'),
+    path('intro1/book-info/<str:username>/',bookInfo,name='binf'),
     path('check/',check,name='check'),
 ]
 

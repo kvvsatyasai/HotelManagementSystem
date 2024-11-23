@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.core.exceptions import ValidationError
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 # Create your models here.  
 class Customer(models.Model):
@@ -16,13 +19,13 @@ class Rooms(models.Model):
     room_id = models.AutoField(primary_key=True)
     Room_No = models.CharField(max_length=50,unique=True)
     Room_Type = models.CharField(max_length=50,choices=CATEGORY)
-    Room_Price = models.CharField(max_length=50)
+    Room_Price = models.CharField(max_length=50) 
     capacity = models.IntegerField(default=3)
     def __str__(self):
         return self.Room_No
 
 class Booking(models.Model):    
-    status = models.CharField(max_length=50,choices=(('Booked','Booked'),('Not Booked','Not Booked')))
+    status = models.CharField(max_length=50,choices=(('Booked','Booked'),('Not Booked','Not Booked')),default='Not Booked')
     book_id = models.AutoField(primary_key=True)
     Customer_Name = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     Room_No = models.ForeignKey(Rooms,on_delete=models.SET_NULL,null=True)
@@ -44,8 +47,7 @@ class maintainanceRequest(models.Model):
 
 class Inventory(models.Model):
     CATEGORY = (
-        ('Electronics','Electronics'),('Furniture','Furniture'),('Stationary','Stationary'),('Grocery','Grocery')
-    )
+        ('Electronics','Electronics'),('Furniture','Furniture'),('Stationary','Stationary'),('Grocery','Grocery'))
     item_id = models.AutoField(primary_key=True)
     item_name = models.CharField(max_length=50)
     item_type = models.CharField(max_length=50,choices=CATEGORY)
@@ -58,7 +60,7 @@ class Inventory(models.Model):
 class Notice(models.Model):
     notice_id = models.AutoField(primary_key=True)
     notice = models.TextField()
-    file = models.FileField(blank=True,upload_to='notices/',null=True,)
+    file = models.FileField(blank=True,upload_to='notices/',null=True)
     date_of_notice = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
